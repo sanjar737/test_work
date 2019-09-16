@@ -1,28 +1,59 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <div>
+    <v-toolbar>
+      <v-toolbar-title>Project</v-toolbar-title>
+
+      <div class="flex-grow-1"></div>
+
+      <v-toolbar-items>
+        <v-btn v-for="link of links" :key="link.title" text :to="link.url">{{link.title}}</v-btn>
+        <v-btn v-if="isLogged" text @click="logoutUser">Logout</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+    <v-snackbar top color="white" :value="error">
+      <span class="red--text">{{ error }}</span>
+      <v-btn color="pink" text @click.native="closeError">Close</v-btn>
+    </v-snackbar>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  methods: {
+    closeError () {
+      this.$store.dispatch("clearError");
+    },
+    logoutUser () {
+      this.$store.dispatch("logoutUser");
+      this.$router.push('/login');
+    }
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error;
+    },
+    isLogged () {
+      return this.$store.getters.isLogged;
+    },
+    links () {
+      if (!this.$store.getters.isLogged) {
+        return [
+            {
+              title: 'Login',
+              url: '/login'
+            },
+            {
+              title: 'Registration',
+              url: '/registration'
+            }
+          ]
+      }
+    }
   }
-}
-</script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+};
+</script>>

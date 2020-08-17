@@ -1,17 +1,17 @@
 <template>
   <v-app>
     <div>
-    <v-toolbar>
-      <v-toolbar-title>Project</v-toolbar-title>
+      <v-toolbar>
+        <v-toolbar-title>Project2</v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+        <div class="flex-grow-1"></div>
 
-      <v-toolbar-items>
-        <v-btn v-for="link of links" :key="link.title" text :to="link.url">{{link.title}}</v-btn>
-        <v-btn v-if="isLogged" text @click="logoutUser">Logout</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-  </div>
+        <v-toolbar-items>
+          <v-btn v-for="link of links" :key="link.title" text :to="link.url">{{link.title}}</v-btn>
+          <v-btn v-if="isLogged" text @click="logoutUser">Logout</v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+    </div>
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -25,35 +25,35 @@
 <script>
 export default {
   methods: {
-    closeError () {
+    closeError() {
       this.$store.dispatch("clearError");
     },
-    logoutUser () {
+    logoutUser() {
       this.$store.dispatch("logoutUser");
-      this.$router.push('/login');
-    }
+      this.$router.push("/login");
+    },
   },
   computed: {
-    error () {
+    error() {
       return this.$store.getters.error;
     },
-    isLogged () {
+    isLogged() {
       return this.$store.getters.isLogged;
     },
-    links () {
+    links() {
       if (!this.$store.getters.isLogged) {
         return [
-            {
-              title: 'Login',
-              url: '/login'
-            },
-            {
-              title: 'Registration',
-              url: '/registration'
-            }
-          ]
+          {
+            title: "Login",
+            url: "/login",
+          },
+          {
+            title: "Registration",
+            url: "/registration",
+          },
+        ];
       }
-    }
-  }
+    },
+  },
 };
 </script>>

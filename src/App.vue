@@ -2,7 +2,7 @@
   <v-app>
     <div>
       <v-toolbar>
-        <v-toolbar-title>Project2</v-toolbar-title>
+        <v-toolbar-title>Project</v-toolbar-title>
 
         <div class="flex-grow-1"></div>
 

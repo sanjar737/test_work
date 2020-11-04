@@ -26,7 +26,6 @@
 export default {
   methods: {
     closeError() {
-      //test
       this.$store.dispatch("clearError");
     },
     logoutUser() {

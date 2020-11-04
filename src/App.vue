@@ -41,6 +41,7 @@ export default {
       return this.$store.getters.isLogged;
     },
     links() {
+    // тест
       if (!this.$store.getters.isLogged) {
         return [
           {
